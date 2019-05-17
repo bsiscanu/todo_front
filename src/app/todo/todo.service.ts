@@ -11,6 +11,7 @@ import { Todo } from './todo';
 export class TodoService {
 
   private token: string;
+  public todos: Array<Todo>;
 
   constructor(
     private http: HttpClient
@@ -43,8 +44,8 @@ export class TodoService {
   /**
    * Adds a new todo entity
    */
-  addOne(id: string, todo: Todo) {
-    return this.http.post<Todo>(`${env.todos}${id}`, todo, {
+  addOne(todo: Todo) {
+    return this.http.post<Todo>(`${env.todos}`, todo, {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${this.token}`

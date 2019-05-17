@@ -1,24 +1,15 @@
 <div class="wrapper">
 
   <header class="main-header">
-    <!-- Logo -->
     <a href="/" class="logo">
-      <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>Todo</b></span>
-      <!-- logo for regular state and mobile devices -->
       <span class="logo-lg"><b>Todo</b></span>
     </a>
-    <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
-      <!-- Sidebar toggle button-->
     </nav>
   </header>
-  <!-- Left side column. contains the logo and sidebar -->
   <aside class="main-sidebar">
-    <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
-      <!-- Sidebar user panel -->
-      <!-- search form -->
       <form action="#" method="get" class="sidebar-form">
         <div class="input-group">
           <input type="text" name="q" class="form-control" placeholder="Search...">
@@ -28,14 +19,12 @@
               </span>
         </div>
       </form>
-      <!-- /.search form -->
-      <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
 
 
         <li>
-          <a routerLink="/projects" routerLinkActive="active">
+          <a routerLink="/projects/list" routerLinkActive="active">
             <i class="fa fa-folder"></i> <span>Projects</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-green">new</small>
@@ -45,7 +34,7 @@
 
 
         <li>
-          <a routerLink="/todos" routerLinkActive="active">
+          <a routerLink="/todos/list" routerLinkActive="active">
             <i class="fa fa-files-o"></i> <span>Todos</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-green">new</small>
@@ -62,7 +51,6 @@
         <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
       </ul>
     </section>
-    <!-- /.sidebar -->
   </aside>
 
   <router-outlet></router-outlet>

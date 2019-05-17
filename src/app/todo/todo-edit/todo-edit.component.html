@@ -1,3 +1,80 @@
-<p>
-  todo-edit works!
-</p>
+<div class="content-wrapper">
+
+  <section class="content-header">
+    <h1>
+      Todos
+      <small>Todo preview</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li class="active">Form</li>
+    </ol>
+  </section>
+
+  <div class="container">
+
+    <section class="content" style="margin-top: 25px">
+      <div class="row" *ngIf="active">
+        <div class="col-md-6 col-md-offset-3">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Update todo</h3>
+            </div>
+            <form role="form"
+                  [formGroup]="todoForm"
+                  (submit)="onSubmit(todoForm.value, todoForm.valid)">
+
+              <div class="box-body">
+
+                <div class="form-group">
+                  <label for="title">Label</label>
+                  <input type="text"
+                         class="form-control"
+                         id="title"
+                         placeholder="Label text"
+                         formControlName="label">
+                </div>
+
+                <div class="form-group">
+                  <label>End date</label>
+
+                  <div class="input-group">
+                    <div class="input-group-addon">
+                      <i class="fa fa-calendar"></i>
+                    </div>
+                    <input type="date"
+                           class="form-control"
+                           [value]="todo.endDate | date:'mm/dd/yyyy'"
+                           formControlName="endDate">
+                  </div>
+                </div>
+
+
+                <div class="form-check">
+                  <input type="checkbox"
+                         class="form-check-input"
+                         formControlName="status"
+                         id="status">
+                  <label class="form-check-label" for="status" style="margin-left: 8px">Status</label>
+                </div>
+
+
+
+              </div>
+              <div class="box-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+
+
+
+
+

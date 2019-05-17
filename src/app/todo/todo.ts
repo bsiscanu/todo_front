@@ -2,7 +2,7 @@ export interface Todo {
 
   _id?: string;
   label: string;
-  endData: Date;
+  endDate: Date;
   status: boolean;
 
 }

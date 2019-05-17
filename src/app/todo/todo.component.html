@@ -43,20 +43,22 @@
                   <th></th>
                 </tr>
 
-                <tr *ngFor="let task of todos; let i = index">
+                <tr *ngFor="let todo of todos; let i = index">
                   <td>{{ i+1 }}</td>
-                  <td>{{ task.label }}</td>
-                  <td>{{ task.endData | date }}</td>
+                  <td>{{ todo.label }}</td>
+                  <td>{{ todo.endDate | date }}</td>
                   <td>Project name</td>
-                  <td><span class="label label-success">{{ task.status }}</span></td>
+                  <td><span class="label label-success">{{ todo.status }}</span></td>
                   <td>
                     <button type="button"
                             class="btn btn-block btn-primary btn-xs"
+                            [routerLink]="['/todos', 'edit', todo._id]"
                             style="width: 70px; display: inline-block; margin-top: 0px; margin-right: 5px">
                       EDIT
                     </button>
                     <button type="button"
                             class="btn btn-block btn-danger btn-xs"
+                            (click)="onRemove(todo._id)"
                             style="width: 70px; display: inline-block; margin-top: 0px">
                       DELETE
                     </button>

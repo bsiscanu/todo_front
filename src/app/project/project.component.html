@@ -41,11 +41,13 @@
                   <td style="width: 300px">
                     <button type="button"
                             class="btn btn-block btn-primary btn-xs"
+                            [routerLink]="['/projects', 'edit', project._id]"
                             style="width: 70px; display: inline-block; margin-top: 0px; margin-right: 5px">
                       EDIT
                     </button>
                     <button type="button"
                             class="btn btn-block btn-danger btn-xs"
+                            (click)="onRemove(project._id)"
                             style="width: 70px; display: inline-block; margin-top: 0px">
                       DELETE
                     </button>
