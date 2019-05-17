@@ -1,0 +1,78 @@
+<div class="content-wrapper">
+
+  <section class="content-header">
+    <h1>
+      Todos
+      <small>list preview</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li><a href="#">Todos</a></li>
+    </ol>
+  </section>
+
+  <div class="container">
+    <section class="content">
+      <div class="row">
+
+
+        <div style="width: 95%">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Todo's Table</h3>
+
+              <div class="box-tools">
+                <div class="input-group input-group-sm" style="width: 125px;">
+                  <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+
+                  <div class="input-group-btn">
+                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body table-responsive no-padding">
+              <table class="table table-hover">
+                <tr>
+                  <th>ID</th>
+                  <th>User</th>
+                  <th>Date</th>
+                  <th>Project</th>
+                  <th>Status</th>
+                  <th></th>
+                </tr>
+
+                <tr *ngFor="let task of todos; let i = index">
+                  <td>{{ i+1 }}</td>
+                  <td>{{ task.label }}</td>
+                  <td>{{ task.endData | date }}</td>
+                  <td>Project name</td>
+                  <td><span class="label label-success">{{ task.status }}</span></td>
+                  <td>
+                    <button type="button"
+                            class="btn btn-block btn-primary btn-xs"
+                            style="width: 70px; display: inline-block; margin-top: 0px; margin-right: 5px">
+                      EDIT
+                    </button>
+                    <button type="button"
+                            class="btn btn-block btn-danger btn-xs"
+                            style="width: 70px; display: inline-block; margin-top: 0px">
+                      DELETE
+                    </button>
+                    <span class="badge bg-red"></span>
+                  </td>
+                </tr>
+
+              </table>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+  </div>
+
+</div>

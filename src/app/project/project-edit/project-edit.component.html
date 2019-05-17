@@ -1,0 +1,11 @@
+<form [formGroup]="projectForm" (submit)="onSubmit(projectForm.value, projectForm.valid)">
+  <div class="form-group">
+    <label for="title">Group name</label>
+    <input type="text"
+           class="form-control"
+           id="title"
+           placeholder="Project Name"
+           formControlName="name">
+  </div>
+
+</form>
