@@ -3,9 +3,11 @@ import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { TodoService } from '../todo.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { of, Subscription } from 'rxjs';
 import { Todo } from '../todo';
 import { switchMap, tap } from 'rxjs/operators';
+import { ProjectService } from '../../project/project.service';
+import { Project } from '../../project/project';
 
 @Component({
   selector: 'app-todo-edit',
@@ -17,20 +19,17 @@ export class TodoEditComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   private todoForm: FormGroup;
   private todo: Todo;
+  public projects: Array<Project>;
   public active: boolean;
 
   constructor(
     private route: ActivatedRoute,
     private location: Location,
     private todoService: TodoService,
+    private projectService: ProjectService,
     private formBuilder: FormBuilder
   ) {
 
-    this.todo = new class implements Todo {
-      public label = '';
-      public endDate = new Date();
-      public status = false;
-    };
   }
 
   ngOnInit() {
@@ -39,16 +38,33 @@ export class TodoEditComponent implements OnInit, OnDestroy {
 
   initForm() {
     this.subscription = this.route.params.pipe(
-      switchMap(data => this.todoService.getOne(data.id)),
-      tap(todo => todo ? this.todo = todo : 'o_0')
-    ).subscribe(() => {
+      switchMap(data => {
+
+        if (data && data.id) {
+          return this.todoService.getOne(data.id);
+        } else {
+          return of(new class implements Todo {
+            public label = '';
+            public endDate = new Date();
+            public status = false;
+            public project;
+          });
+        }
+
+      }),
+      tap((todo: Todo) => this.todo = todo),
+      switchMap(() => this.projectService.getAll())
+    ).subscribe(projects => {
       this.todoForm = this.formBuilder.group({
         label: [this.todo.label, [Validators.required, Validators.minLength(3)]],
         endDate: [this.todo.endDate],
-        status: [this.todo.status]
+        status: [this.todo.status],
+        project: [this.todo.project]
       });
 
+      this.projects = projects;
       this.active = true;
+
     });
   }
 
@@ -62,6 +78,10 @@ export class TodoEditComponent implements OnInit, OnDestroy {
           .subscribe(() => this.location.back());
       }
     }
+  }
+
+  onBack() {
+    this.location.back();
   }
 
   ngOnDestroy() {

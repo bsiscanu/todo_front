@@ -9,21 +9,30 @@ import { ProjectEditComponent } from './project/project-edit/project-edit.compon
 import { ProjectShowComponent } from './project/project-show/project-show.component';
 import { TodoComponent } from './todo/todo.component';
 import { ProjectComponent } from './project/project.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RegisterComponent } from './user/register/register.component';
+import { LoginComponent } from './user/login/login.component';
+import { AuthGuard } from './user/guards/auth.guard';
+import { JwtInterceptor } from './user/interceptors/jwt.interceptor';
+import { ErrorInterceptor } from './user/interceptors/error.interceptor';
 
 const routes: Routes = [
-  { path: 'todos', children: [
+  { path: 'todos', canActivate: [AuthGuard], children: [
     { path: 'list', component: TodoComponent },
     { path: 'new', component: TodoEditComponent },
     { path: 'edit/:id', component: TodoEditComponent },
     { path: 'show/:id', component: TodoShowComponent }
   ]},
-  { path: 'projects', children: [
+  { path: 'projects', canActivate: [AuthGuard], children: [
     { path: 'list', component: ProjectComponent },
     { path: 'new', component: ProjectEditComponent },
     { path: 'edit/:id', component: ProjectEditComponent },
     { path: 'show/id', component: ProjectShowComponent }
+  ]},
+  { path: 'users', children: [
+    { path: 'login', component: LoginComponent },
+    { path: 'register', component: RegisterComponent },
   ]},
   { path: '**', redirectTo: '/projects/list' }
 ];
@@ -37,6 +46,8 @@ const routes: Routes = [
     ProjectEditComponent,
     ProjectShowComponent,
     ProjectComponent,
+    RegisterComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,7 +57,10 @@ const routes: Routes = [
     FormsModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

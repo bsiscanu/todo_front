@@ -15,10 +15,12 @@
 
     <section class="content" style="margin-top: 25px">
       <div class="row" *ngIf="active">
-        <div class="col-md-6 col-md-offset-3">
+        <div class="col-md-6">
           <div class="box box-primary">
             <div class="box-header with-border">
               <h3 class="box-title">Update project</h3>
+              <button class="btn btn-warning" style="float: right" (click)="onBack()"> Back </button>
+
             </div>
             <form role="form"
                   [formGroup]="projectForm"
@@ -34,27 +36,52 @@
                          placeholder="Project Name"
                          formControlName="name">
                 </div>
-                <div class="form-group">
-                  <label for="exampleInputPassword1">Todos</label>
-                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                </div>
-
 
               </div>
               <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
+
+                <div style="text-align: center  ">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+
               </div>
             </form>
+
           </div>
         </div>
+
+
+<!--&lt;!&ndash;  todo: create the second form for todos  &ndash;&gt;-->
+
+<!--        <div class="col-md-6">-->
+<!--          <div class="box box-success">-->
+<!--            <div class="box-header with-border">-->
+<!--              <h3 class="box-title">Todo's list</h3>-->
+
+<!--              <div formArrayName="todos">-->
+<!--                <div *ngFor="let td of projectForm.controls.todos['controls']; let i=index">-->
+
+<!--                  <select [id]="'id' + i" class="form-control" [formControlName]="i">-->
+
+<!--                    <option *ngFor="let todo of todos" [value]="todo._id">-->
+<!--                      {{ todo.label }}-->
+<!--                    </option>-->
+
+<!--                  </select>-->
+
+<!--                </div>-->
+<!--              </div>-->
+
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+
+<!--&lt;!&ndash;  todo: create the second form for todos  &ndash;&gt;-->
+
+
+
       </div>
     </section>
 
   </div>
 </div>
-
-
-
-
-
-

@@ -19,6 +19,7 @@
           <div class="box box-primary">
             <div class="box-header with-border">
               <h3 class="box-title">Update todo</h3>
+              <button class="btn btn-warning" style="float: right" (click)="onBack()"> Back </button>
             </div>
             <form role="form"
                   [formGroup]="todoForm"
@@ -44,9 +45,19 @@
                     </div>
                     <input type="date"
                            class="form-control"
-                           [value]="todo.endDate | date:'mm/dd/yyyy'"
+                           [value]="todo.endDate | date:'yyyy-MM-dd'"
                            formControlName="endDate">
                   </div>
+                </div>
+
+<!--                todo: update the project in the same time with the todo-->
+                <div class="form-group">
+                  <label>Project</label>
+                  <select class="form-control select2" formControlName="project">
+                    <option *ngFor="let project of projects" [value]="project._id">
+                      {{ project.name }}
+                    </option>
+                  </select>
                 </div>
 
 
@@ -58,11 +69,11 @@
                   <label class="form-check-label" for="status" style="margin-left: 8px">Status</label>
                 </div>
 
-
-
               </div>
               <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <div style="text-align: center  ">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
               </div>
             </form>
           </div>

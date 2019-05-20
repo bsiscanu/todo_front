@@ -2,11 +2,12 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { ProjectService } from '../project.service';
-import { Subscription } from 'rxjs';
+import { of, Subscription } from 'rxjs';
 import { Project } from '../project';
 import { switchMap, tap } from 'rxjs/operators';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Todo } from '../../todo/todo';
+import { TodoService } from '../../todo/todo.service';
 
 @Component({
   selector: 'app-project-edit',
@@ -18,19 +19,17 @@ export class ProjectEditComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   public projectForm: FormGroup;
   private project: Project;
+  public todos: Array<Todo>;
   public active: boolean;
 
   constructor(
     private route: ActivatedRoute,
     private location: Location,
     private projectService: ProjectService,
+    private todoService: TodoService,
     private formBuilder: FormBuilder
   ) {
 
-    this.project = new class implements Project {
-      public name = '';
-      public todos: Array<Todo> = [];
-    };
   }
 
   ngOnInit() {
@@ -39,18 +38,32 @@ export class ProjectEditComponent implements OnInit, OnDestroy {
 
   initForm() {
     this.subscription = this.route.params.pipe(
-      switchMap(data => this.projectService.getOne(data.id)),
-      tap(project => project ? this.project = project : '0_o')
-    ).subscribe(() => {
+      switchMap(data => {
+
+        if (data && data.id) {
+          return this.projectService.getOne(data.id);
+        } else {
+          return of(new class implements Project {
+            public name = '';
+            public todos: Array<Todo> = [];
+          });
+        }
+
+      }),
+      tap((project: Project) => this.project = project),
+      switchMap(() => this.todoService.getAll())
+    ).subscribe(todos => {
       this.projectForm = this.formBuilder.group({
         name: [this.project.name, [Validators.required, Validators.minLength(3)]],
-        todo: [this.project.todos ]
+        // todos: this.formBuilder.array([this.project.todos.map(todo => todo._id)])
       });
 
+      this.todos = todos;
       this.active = true;
 
     });
   }
+
 
   onSubmit(value, valid) {
     if (valid) {
@@ -64,17 +77,11 @@ export class ProjectEditComponent implements OnInit, OnDestroy {
     }
   }
 
+  onBack() {
+    this.location.back();
+  }
+
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
 }
-
-
-
-
-/**
-
- 1. todos and projects doesn't appear when menu is changed
- 2. left menu dissapear in mobile, no way to select data after collapse
-
- **/

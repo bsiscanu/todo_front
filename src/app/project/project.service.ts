@@ -4,9 +4,7 @@ import { Observable } from 'rxjs';
 import { Project } from './project';
 import { env } from '../../environments/environment';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class ProjectService {
 
   private token: string;

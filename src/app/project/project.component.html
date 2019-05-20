@@ -15,18 +15,25 @@
     <section class="content">
       <div class="row">
 
-
         <div style="width: 95%">
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">Project's Table</h3>
+              <div class="col-md-2 col-md-offset-10">
+                <button type="button"
+                        class="btn btn-block btn-primary btn-sm"
+                        [routerLink]="['/projects', 'new']">
+                  Add Project
+                </button>
+              </div>
             </div>
+
             <div class="box-body no-padding">
               <table class="table table-condensed">
                 <tr>
                   <th style="width: 10px">#</th>
-                  <th>Title</th>
-                  <th>Progress</th>
+                  <th>Name</th>
+                  <th style="padding-left: 30px;">Progress</th>
                   <th style="width: 100px"></th>
                 </tr>
 
@@ -60,43 +67,6 @@
           </div>
 
         </div>
-
-
-<!--          <div class="col-md-4" *ngFor="let project of projects; let i = index">-->
-<!--            &lt;!&ndash; Widget: user widget style 1 &ndash;&gt;-->
-<!--            <div class="box box-widget widget-user-2">-->
-<!--              &lt;!&ndash; Add the bg color to the header using any of the bg-* classes &ndash;&gt;-->
-<!--              <div class="widget-user-header bg-aqua-active">-->
-<!--                &lt;!&ndash; /.widget-user-image &ndash;&gt;-->
-<!--                <h3 class="widget-user-username" style="text-align: center; margin-left: 0; text-transform: capitalize">{{project.name}}</h3>-->
-<!--              </div>-->
-<!--              <div class="box-footer no-padding">-->
-<!--                <ul class="nav nav-stacked">-->
-<!--                  <li *ngFor="let todo of project.todos">-->
-<!--                    <a href="#" style="text-transform: capitalize">-->
-<!--                      {{todo.label}}-->
-<!--                      <span class="pull-right badge"-->
-<!--                            [class.bg-green]="todo.status"-->
-<!--                            [class.bg-red]="!todo.status">-->
-<!--                        {{ todo.status ? 'done' : 'work' }}-->
-<!--                      </span>-->
-<!--                    </a>-->
-<!--                  </li>-->
-<!--                  <li><a href="#">red_Example <span class="pull-right badge bg-red">work</span></a></li>-->
-<!--                  <li><div style="margin-top: 20px;"></div></li>-->
-<!--                  <li>-->
-
-<!--                    <div>-->
-<!--                      <button type="button" class="btn btn-block btn-warning">EDIT</button>-->
-<!--                    </div>-->
-
-<!--                  </li>-->
-<!--                </ul>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            &lt;!&ndash; /.widget-user &ndash;&gt;-->
-<!--          </div>-->
-
 
       </div>
     </section>

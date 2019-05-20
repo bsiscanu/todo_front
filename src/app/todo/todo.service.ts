@@ -5,9 +5,7 @@ import { env } from '../../environments/environment';
 import { Todo } from './todo';
 
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class TodoService {
 
   private token: string;
