@@ -8,7 +8,6 @@ import { Todo } from './todo';
 @Injectable({ providedIn: 'root' })
 export class TodoService {
 
-  private token: string;
   public todos: Array<Todo>;
 
   constructor(
@@ -21,22 +20,14 @@ export class TodoService {
    * Loads all todo entities
    */
   getAll(): Observable<Todo[]> {
-    return this.http.get<Todo[]>(env.todos, {
-      headers: {
-        Authorization: `Bearer ${this.token}`
-      }
-    });
+    return this.http.get<Todo[]>(env.todos);
   }
 
   /**
    * Gets a todo by id
    */
   getOne(id: string): Observable<Todo> {
-    return this.http.get<Todo>(`${env.todos}${id}`, {
-      headers: {
-        Authorization: `Bearer ${this.token}`
-      }
-    });
+    return this.http.get<Todo>(`${env.todos}${id}`);
   }
 
   /**
@@ -46,7 +37,6 @@ export class TodoService {
     return this.http.post<Todo>(`${env.todos}`, todo, {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${this.token}`
       }
     });
   }
@@ -58,7 +48,6 @@ export class TodoService {
     return this.http.put<Todo>(`${env.todos}${id}`, todo, {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${this.token}`
       }
     });
   }
@@ -67,10 +56,6 @@ export class TodoService {
    * Removes a todo by id
    */
   remove(id: string) {
-    return this.http.delete(`${env.todos}${id}`, {
-      headers: {
-        Authorization: `Bearer ${this.token}`
-      }
-    });
+    return this.http.delete(`${env.todos}${id}`);
   }
 }

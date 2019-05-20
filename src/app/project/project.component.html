@@ -8,6 +8,7 @@
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
       <li class="active">Projects</li>
+      <li class="active">List</li>
     </ol>
   </section>
 
@@ -46,17 +47,26 @@
                     </div>
                   </td>
                   <td style="width: 300px">
+
                     <button type="button"
                             class="btn btn-block btn-primary btn-xs"
                             [routerLink]="['/projects', 'edit', project._id]"
                             style="width: 70px; display: inline-block; margin-top: 0px; margin-right: 5px">
                       EDIT
                     </button>
+
                     <button type="button"
                             class="btn btn-block btn-danger btn-xs"
                             (click)="onRemove(project._id)"
-                            style="width: 70px; display: inline-block; margin-top: 0px">
+                            style="width: 70px; display: inline-block; margin-top: 0px; margin-right: 5px">
                       DELETE
+                    </button>
+
+                    <button type="button"
+                            class="btn btn-block btn-success btn-xs"
+                            [routerLink]="['/projects', 'show', project._id]"
+                            style="width: 70px; display: inline-block; margin-top: 0px">
+                      SHOW
                     </button>
                     <span class="badge bg-red"></span>
                   </td>

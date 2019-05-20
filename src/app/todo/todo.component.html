@@ -8,6 +8,7 @@
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
       <li><a href="#">Todos</a></li>
+      <li><a href="#">List</a></li>
     </ol>
   </section>
 
@@ -43,7 +44,7 @@
                   <td>{{ i+1 }}</td>
                   <td>{{ todo.label }}</td>
                   <td>{{ todo.endDate | date }}</td>
-                  <td>Project name</td>
+                  <td>{{ todo.project.name }}</td>
                   <td><span class="label"
                             [class.label-success]="todo.status"
                             [class.label-warning]="!todo.status">

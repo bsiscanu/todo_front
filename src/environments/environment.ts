@@ -6,7 +6,7 @@ export const env = {
   production: false,
   projects: 'http://localhost:8080/projects/',
   todos: 'http://localhost:8080/todos/',
-  user: 'http://localhost:8080/users/'
+  users: 'http://localhost:8080/users/'
 };
 
 /*

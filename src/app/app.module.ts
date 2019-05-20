@@ -27,6 +27,7 @@ const routes: Routes = [
   { path: 'projects', canActivate: [AuthGuard], children: [
     { path: 'list', component: ProjectComponent },
     { path: 'new', component: ProjectEditComponent },
+    { path: 'show/:id', component: ProjectShowComponent },
     { path: 'edit/:id', component: ProjectEditComponent },
     { path: 'show/id', component: ProjectShowComponent }
   ]},
